@@ -1,0 +1,72 @@
+server:
+  port: 3801
+
+#    url: jdbc:mysql://192.168.200.:3306/eagle_db?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+#sharding:
+#  jdbc:
+#    config:
+#      sharding:
+#        default-database-strategy: # 分库策略
+#          inline:
+#
+#        tables:
+#          book: # 分表策略 其中book为逻辑表 分表主要取决于id行
+#            actual-data-nodes: db$->{0..2}.book_$->{0..1}
+#            table-strategy:
+#              inline:
+#                sharding-column: count
+#                algorithm-expression: book_$->{count % 2}  # 分片算法表达式
+#      props:
+#        sql:
+#          show: true
+
+  # 主键 UUID 18位数 如果是分布式还要进行一个设置 防止主键重复
+  #sharding.jdbc.config.sharding.tables.user.key-generator-column-name=id
+
+  # 打印执行的数据库以及语句
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    datasource:
+      names: db0,db1,db2
+      db0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.200.129:3306/db0?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: <12345Qq
+      db1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.200.129:3306/db1?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: <12345Qq
+      db2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://192.168.200.129:3306/db2?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password: <12345Qq
+    sharding:
+      default-database-strategy:
+        inline:
+          sharding-column: id
+          algorithm-expression: db$->{id % 3}  # 水平拆分的数据库（表） 配置分库 + 分表策略 行表达式分片策略
+      tables:
+        book: # 分表策略 其中book为逻辑表 分表主要取决于id行
+          key-generator:
+            column: id
+            type: SNOWFLAKE
+            props:
+              worker:
+                id: 1
+
+          actual-data-nodes: db$->{0..2}.book_$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: count
+              algorithm-expression: book_$->{count % 2}  # 分片算法表达式
+    props:
+      sql:
+        show: true

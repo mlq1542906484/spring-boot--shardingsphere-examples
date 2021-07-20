@@ -39,26 +39,45 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.1.1</version>
+            <version>3.4.3</version>
         </dependency>
         <!--shardingsphere start-->
         <!-- for spring boot -->
+<!--        <dependency>-->
+<!--            <groupId>io.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--        </dependency>-->
+<!--        &lt;!&ndash; for spring namespace &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-jdbc-spring-namespace</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--        </dependency>-->
+
+        <!--shardingsphere的springboot依赖jar-->
         <dependency>
-            <groupId>io.shardingsphere</groupId>
+            <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>3.1.0</version>
+            <version>4.1.1</version>
         </dependency>
-        <!-- for spring namespace -->
+
         <dependency>
-            <groupId>io.shardingsphere</groupId>
+            <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-namespace</artifactId>
-            <version>3.1.0</version>
+            <version>4.1.1</version>
         </dependency>
         <!--shardingsphere end-->
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
         </dependency>
     </dependencies>
 
