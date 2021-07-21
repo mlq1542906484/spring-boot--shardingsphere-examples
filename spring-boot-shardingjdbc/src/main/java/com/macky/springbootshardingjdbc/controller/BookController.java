@@ -41,7 +41,7 @@ public class BookController {
         Page<Book> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.eq("name", "孟令乾");
-//        queryWrapper.orderByAsc("id");
+        queryWrapper.orderByAsc("id");
         IPage<Book> res = bookService.page(page);
         return res;
     }
