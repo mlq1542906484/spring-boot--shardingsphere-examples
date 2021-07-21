@@ -6,28 +6,28 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.macky.springbootshardingjdbc.entity.Book;
 import com.macky.springbootshardingjdbc.service.BookService;
 import com.macky.springbootshardingjdbc.util.IdWorker;
-import com.macky.springbootshardingjdbc.util.SnowFlakeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/book")
 public class BookController {
 
     @Autowired
     BookService bookService;
 
-    private IdWorker worker = new IdWorker(1,1);
+    private IdWorker worker = new IdWorker(1, 1);
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
     public List<Book> getItems() {
         return bookService.getBookList();
     }
 
-    @RequestMapping(value = "/book", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Boolean saveItem(Book book) {
 //        Comparable<?> id = SnowFlakeUtils.getId(Long.parseLong("123"));
 //        book.setId(Long.parseLong(id.toString()));
@@ -41,8 +41,9 @@ public class BookController {
         Page<Book> page = new Page<>(pageNum, pageSize);
         QueryWrapper<Book> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.eq("name", "孟令乾");
-        queryWrapper.orderByAsc("id");
-        return bookService.page(page, queryWrapper);
+//        queryWrapper.orderByAsc("id");
+        IPage<Book> res = bookService.page(page);
+        return res;
     }
 
 }

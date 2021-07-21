@@ -23,8 +23,4 @@ public class BookServiceImpl extends ServiceImpl<BookMapper, Book> implements Bo
         return baseMapper.selectList(Wrappers.<Book>lambdaQuery());
     }
 
-    @Override
-    public boolean save(Book book) {
-        return super.save(book);
-    }
 }
