@@ -1,29 +1,6 @@
 server:
   port: 3801
 
-#    url: jdbc:mysql://192.168.200.:3306/eagle_db?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
-#sharding:
-#  jdbc:
-#    config:
-#      sharding:
-#        default-database-strategy: # 分库策略
-#          inline:
-#
-#        tables:
-#          book: # 分表策略 其中book为逻辑表 分表主要取决于id行
-#            actual-data-nodes: db$->{0..2}.book_$->{0..1}
-#            table-strategy:
-#              inline:
-#                sharding-column: count
-#                algorithm-expression: book_$->{count % 2}  # 分片算法表达式
-#      props:
-#        sql:
-#          show: true
-
-  # 主键 UUID 18位数 如果是分布式还要进行一个设置 防止主键重复
-  #sharding.jdbc.config.sharding.tables.user.key-generator-column-name=id
-
-  # 打印执行的数据库以及语句
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -62,11 +39,11 @@ spring:
               worker:
                 id: 1
 
-          actual-data-nodes: db$->{0..2}.book_$->{0..1}
+          actual-data-nodes: db$->{0..2}.book_$->{0..2}
           table-strategy:
             inline:
               sharding-column: count
-              algorithm-expression: book_$->{count % 2}  # 分片算法表达式
+              algorithm-expression: book_$->{count % 3}  # 分片算法表达式
     props:
       sql:
         show: true
