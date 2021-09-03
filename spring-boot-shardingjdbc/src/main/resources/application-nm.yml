@@ -3,11 +3,22 @@ server:
 
 spring:
   datasource:
-    druid:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: <12345Qq
-      url: jdbc:mysql://192.168.200.130:3306/master?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: <12345Qq
+    url: jdbc:mysql://192.168.200.129:3306/master?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+  redis:
+    database: 1
+    host: 127.0.0.1
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        max-idle: 50
+        min-idle: 1
+        max-active: 100
+        max-wait: -1
+    timeout: 1000
 
 mybatis-plus:
   configuration:

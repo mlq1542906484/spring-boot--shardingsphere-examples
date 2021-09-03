@@ -41,38 +41,30 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.3.1</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
-<!--            <version>1.1.10</version>-->
-<!--        </dependency>-->
-        <!--shardingsphere start-->
-        <!-- for spring boot -->
-<!--        <dependency>-->
-<!--            <groupId>io.shardingsphere</groupId>-->
-<!--            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
-<!--            <version>3.1.0</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; for spring namespace &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>io.shardingsphere</groupId>-->
-<!--            <artifactId>sharding-jdbc-spring-namespace</artifactId>-->
-<!--            <version>3.1.0</version>-->
-<!--        </dependency>-->
 
         <!--shardingsphere的springboot依赖jar-->
-        <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>4.1.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
+<!--            <version>4.1.1</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.shardingsphere</groupId>-->
+<!--            <artifactId>sharding-jdbc-spring-namespace</artifactId>-->
+<!--            <version>4.1.1</version>-->
+<!--        </dependency>-->
+        <!--shardingsphere end-->
 
         <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-namespace</artifactId>
-            <version>4.1.1</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!--shardingsphere end-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>

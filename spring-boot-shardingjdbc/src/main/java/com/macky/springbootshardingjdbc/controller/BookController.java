@@ -7,6 +7,8 @@ import com.macky.springbootshardingjdbc.entity.Book;
 import com.macky.springbootshardingjdbc.service.BookService;
 import com.macky.springbootshardingjdbc.util.IdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,9 @@ public class BookController {
     @Autowired
     BookService bookService;
 
+    @Autowired
+    StringRedisTemplate redisTemplate;
+
     private IdWorker worker = new IdWorker(1, 1);
 
     @RequestMapping(value = "/getList", method = RequestMethod.GET)
@@ -28,11 +33,16 @@ public class BookController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @Transactional
     public Boolean saveItem(Book book) {
 //        Comparable<?> id = SnowFlakeUtils.getId(Long.parseLong("123"));
 //        book.setId(Long.parseLong(id.toString()));
         Long id = worker.nextId();
         book.setId(id);
+        Long count = redisTemplate.opsForValue().increment("count");
+        String name = "mlq" + count;
+        book.setName(name);
+        book.setCount(Math.toIntExact(count));
         return bookService.save(book);
     }
 
